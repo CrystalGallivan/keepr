@@ -6,7 +6,7 @@ using keepr.Repositories;
 
 namespace keepr.Controllers
 {
-  [Route("api[controller]")]
+  [Route("api/[controller]")]
   [ApiController]
   public class VaultsController : ControllerBase
   {
@@ -44,7 +44,8 @@ namespace keepr.Controllers
       }
     }
     //GET BY OTHER MEANS api/vaults/something
-    [HttpGet("{}")]
+    //TODO Id has been placed in the params temporarily so the server can spin up
+    [HttpGet("{id}")]
     public ActionResult<Vault> Get(Vault value)
     {
       try

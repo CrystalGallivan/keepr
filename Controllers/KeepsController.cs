@@ -6,7 +6,7 @@ using keepr.Repositories;
 
 namespace keepr.Controllers
 {
-  [Route("api[controller]")]
+  [Route("api/[controller]")]
   [ApiController]
   public class KeepsController : ControllerBase
   {
@@ -44,7 +44,8 @@ namespace keepr.Controllers
       }
     }
     //GET BY OTHER MEANS api/keeps/something
-    [HttpGet("{}")]
+    //TODO Id has been placed in the params temporarily so the server can spin up
+    [HttpGet("{id}")]
     public ActionResult<Keep> Get(Keep value)
     {
       try
