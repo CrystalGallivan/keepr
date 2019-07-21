@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using keepr.Models;
 using System;
 using keepr.Repositories;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace keepr.Controllers
 {
@@ -16,6 +18,7 @@ namespace keepr.Controllers
       _repo = repo;
     }
     //GET ALL api/vaults
+    [Authorize]
     [HttpGet]
     public ActionResult<IEnumerable<Vault>> Get()
     {
@@ -30,6 +33,7 @@ namespace keepr.Controllers
       }
     }
     //GET BY ID api/vaults/1
+    [Authorize]
     [HttpGet("{id}")]
     public ActionResult<Vault> Get(int id)
     {
@@ -45,26 +49,30 @@ namespace keepr.Controllers
     }
     //GET BY OTHER MEANS api/vaults/something
     //TODO Id has been placed in the params temporarily so the server can spin up
-    [HttpGet("{id}")]
-    public ActionResult<Vault> Get(Vault value)
-    {
-      try
-      {
-        // value.something = something;
-        return Ok(_repo.GetBy(value));
-      }
-      catch (Exception e)
-      {
+    // [Authorize]
+    // [HttpGet("{id}")]
+    // public ActionResult<Vault> Get(Vault value)
+    // {
+    //   try
+    //   {
+    //     // value.something = something;
+    //     return Ok(_repo.GetBy(value));
+    //   }
+    //   catch (Exception e)
+    //   {
 
-        return BadRequest(e);
-      }
-    }
+    //     return BadRequest(e);
+    //   }
+    // }
     //CREATE api/vaults
+    [Authorize]
     [HttpPost]
     public ActionResult<Vault> Post(Vault value)
     {
       try
       {
+        var userId = HttpContext.User.FindFirstValue("Id");
+        value.UserId = userId;
         return Ok(_repo.Create(value));
       }
       catch (Exception e)
@@ -74,6 +82,7 @@ namespace keepr.Controllers
       }
     }
     //UPDATE api/vaults/1
+    [Authorize]
     [HttpPut("{id}")]
     public ActionResult<Vault> Put(int id, [FromBody] Vault value)
     {
@@ -88,6 +97,7 @@ namespace keepr.Controllers
       }
     }
     //DELETE api/vaults/1
+    [Authorize]
     [HttpDelete("{id}")]
     public ActionResult<string> Delete(int id)
     {

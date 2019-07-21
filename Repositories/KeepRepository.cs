@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using Dapper;
 using keepr.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace keepr.Repositories
 {
@@ -37,27 +38,27 @@ namespace keepr.Repositories
       }
     }
 
-    public Keep GetBy(Keep value)
-    {
-      //TODO This mehtod may not be necessary
-      try
-      {
-        string query = @"";
-        return _db.QueryFirstOrDefault<Keep>(query, value);
-      }
-      catch (Exception e)
-      {
-        throw e;
-      }
-    }
+    // public Keep GetBy(Keep value)
+    // {
+    //   //TODO This mehtod may not be necessary
+    //   try
+    //   {
+    //     string query = @"";
+    //     return _db.QueryFirstOrDefault<Keep>(query, value);
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     throw e;
+    //   }
+    // }
 
     public Keep Create(Keep value)
     {
       try
       {
-        string query = @"INSERT INTO keeps (name, description, userId, img, isPrivate, views, shares, keeps)
-                VALUES (@Name, @Description, @UserId, @Img, @IsPrivate, @Views, @Shares, @Keeps);
-                SELECT LAST_INSERT_ID;
+        string query = @"INSERT INTO keeps (name, description, img, isPrivate)
+                VALUES (@Name, @Description, @Img, @IsPrivate);
+                SELECT LAST_INSERT_ID();
                 ";
         int id = _db.ExecuteScalar<int>(query, value);
         value.Id = id;
@@ -78,12 +79,8 @@ namespace keepr.Repositories
         SET
         name = @Name,
         description = @Description,
-        userId = @UserId,
         img = @Img,
-        isPrivate = @IsPrivate,
-        views = @Views,
-        shares = @Shares,
-        keeps = @Keeps
+        isPrivate = @IsPrivate
         WHERE id = @Id;
         SELECT * FROM keeps WHERE id = @Id;
         ";

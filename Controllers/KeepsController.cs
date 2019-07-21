@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using keepr.Models;
 using System;
 using keepr.Repositories;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace keepr.Controllers
 {
@@ -45,26 +47,29 @@ namespace keepr.Controllers
     }
     //GET BY OTHER MEANS api/keeps/something
     //TODO Id has been placed in the params temporarily so the server can spin up
-    [HttpGet("{id}")]
-    public ActionResult<Keep> Get(Keep value)
-    {
-      try
-      {
-        // value.something = something;
-        return Ok(_repo.GetBy(value));
-      }
-      catch (Exception e)
-      {
+    // [HttpGet("{id}")]
+    // public ActionResult<Keep> Get(Keep value)
+    // {
+    //   try
+    //   {
+    //     // value.something = something;
+    //     return Ok(_repo.GetBy(value));
+    //   }
+    //   catch (Exception e)
+    //   {
 
-        return BadRequest(e);
-      }
-    }
+    //     return BadRequest(e);
+    //   }
+    // }
     //CREATE api/keeps
+    [Authorize]
     [HttpPost]
     public ActionResult<Keep> Post(Keep value)
     {
       try
       {
+        var userId = HttpContext.User.FindFirstValue("Id");
+        value.UserId = userId;
         return Ok(_repo.Create(value));
       }
       catch (Exception e)
@@ -74,6 +79,7 @@ namespace keepr.Controllers
       }
     }
     //UPDATE api/keeps/1
+    [Authorize]
     [HttpPut("{id}")]
     public ActionResult<Keep> Put(int id, [FromBody] Keep value)
     {
@@ -88,6 +94,7 @@ namespace keepr.Controllers
       }
     }
     //DELETE api/keeps/1
+    [Authorize]
     [HttpDelete("{id}")]
     public ActionResult<string> Delete(int id)
     {

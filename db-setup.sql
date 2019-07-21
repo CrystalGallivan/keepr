@@ -1,4 +1,4 @@
--- USE keeper123;
+USE keeper123;
 -- CREATE TABLE users (
 --     id VARCHAR(255) NOT NULL,
 --     username VARCHAR(20) NOT NULL,
@@ -7,7 +7,7 @@
 --     PRIMARY KEY (id),
 --     UNIQUE KEY email (email)
 -- );
-
+SELECT * FROM users;
 -- CREATE TABLE vaults (
 --     id int NOT NULL AUTO_INCREMENT,
 --     name VARCHAR(20) NOT NULL,

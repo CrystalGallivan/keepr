@@ -37,19 +37,19 @@ namespace keepr.Repositories
       }
     }
 
-    public Vault GetBy(Vault value)
-    {
-      //TODO This mehtod may not be necessary
-      try
-      {
-        string query = @"";
-        return _db.QueryFirstOrDefault<Vault>(query, value);
-      }
-      catch (Exception e)
-      {
-        throw e;
-      }
-    }
+    // public Vault GetBy(Vault value)
+    // {
+    //   //TODO This mehtod may not be necessary
+    //   try
+    //   {
+    //     string query = @"";
+    //     return _db.QueryFirstOrDefault<Vault>(query, value);
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     throw e;
+    //   }
+    // }
 
     public Vault Create(Vault value)
     {
@@ -57,7 +57,7 @@ namespace keepr.Repositories
       {
         string query = @"INSERT INTO vaults (name, description, userId)
                 VALUES (@Name, @Description, @UserId);
-                SELECT LAST_INSERT_ID;
+                SELECT LAST_INSERT_ID();
                 ";
         int id = _db.ExecuteScalar<int>(query, value);
         value.Id = id;
@@ -77,8 +77,7 @@ namespace keepr.Repositories
         UPDATE vaults
         SET
         name = @Name,
-        description = @Description,
-        userId = @UserId
+        description = @Description
         WHERE id = @Id;
         SELECT * FROM vaults WHERE id = @Id;
         ";
