@@ -8,7 +8,7 @@ using System.Security.Claims;
 
 namespace keepr.Controllers
 {
-  [Route("api[controller]")]
+  [Route("api/[controller]")]
   [ApiController]
   public class VaultkeepsController : ControllerBase
   {
@@ -17,7 +17,8 @@ namespace keepr.Controllers
     {
       _repo = repo;
     }
-    //GET ALL api/vaultkeeps
+    // GET ALL api/vaultkeeps
+    [Authorize]
     [HttpGet]
     public ActionResult<IEnumerable<Vaultkeep>> Get()
     {
@@ -31,28 +32,17 @@ namespace keepr.Controllers
         return BadRequest(e);
       }
     }
-    //GET BY ID api/vaultkeeps/1
-    [HttpGet("{id}")]
-    public ActionResult<Vaultkeep> Get(int id)
-    {
-      try
-      {
-        return Ok(_repo.GetById(id));
-      }
-      catch (Exception e)
-      {
-
-        return BadRequest(e);
-      }
-    }
-    // //GET BY OTHER MEANS api/vaultkeeps/something
-    // [HttpGet("{}")]
-    // public ActionResult<Vaultkeep> Get(Vaultkeep value)
+    //GET BY ID api/vaultkeeps/vaultId
+    [Authorize]
+    [HttpGet("{vaultId}")]
+    // (DataVaultkeep)
+    // public ActionResult<IEnumerable<Vaultkeep>> Get(int vaultId)
     // {
     //   try
     //   {
-    //     // value.something = something;
-    //     return Ok(_repo.GetBy(value));
+    //     var userId = HttpContext.User.FindFirstValue("Id");
+
+    //     return Ok(_repo.GetById(vaultId, userId));
     //   }
     //   catch (Exception e)
     //   {
@@ -60,10 +50,24 @@ namespace keepr.Controllers
     //     return BadRequest(e);
     //   }
     // }
-    //CREATE api/vaultkeeps
+    public ActionResult<IEnumerable<Keep>> Get(int vaultId)
+    {
+      try
+      {
+        var userId = HttpContext.User.FindFirstValue("Id");
+
+        return Ok(_repo.GetById(vaultId, userId));
+      }
+      catch (Exception e)
+      {
+
+        return BadRequest(e);
+      }
+    }
+
     [Authorize]
     [HttpPost]
-    public ActionResult<Vaultkeep> Post(Vaultkeep value)
+    public ActionResult<Vaultkeep> Post([FromBody] Vaultkeep value)
     {
       try
       {
@@ -77,27 +81,16 @@ namespace keepr.Controllers
         return BadRequest(e);
       }
     }
-    //UPDATE api/vaultkeeps/1
-    [HttpPut("{id}")]
-    public ActionResult<Vaultkeep> Put(int id, [FromBody] Vaultkeep value)
+    //DELETE api/vaultkeeps
+    [Authorize]
+    [HttpPut]
+    public ActionResult<Vaultkeep> Put([FromBody] Vaultkeep value)
     {
       try
       {
-        value.Id = id;
-        return Ok(_repo.Update(value));
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e);
-      }
-    }
-    //DELETE api/vaultkeeps/1
-    [HttpDelete("{id}")]
-    public ActionResult<string> Delete(int id)
-    {
-      try
-      {
-        return Ok(_repo.Delete(id));
+        var userId = HttpContext.User.FindFirstValue("Id");
+        value.UserId = userId;
+        return Ok(_repo.Delete(value));
       }
       catch (Exception e)
       {

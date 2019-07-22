@@ -7,7 +7,15 @@ USE keeper123;
 --     PRIMARY KEY (id),
 --     UNIQUE KEY email (email)
 -- );
-SELECT * FROM users;
+-- DROP TABLE users;
+-- DROP TABLE keeps;
+-- DROP TABLE vaults;
+
+-- DELETE FROM keeps;
+-- SELECT * FROM users;
+-- SELECT * FROM keeps;
+-- SELECT * FROM vaults;
+SELECT * FROM vaultkeeps;
 -- CREATE TABLE vaults (
 --     id int NOT NULL AUTO_INCREMENT,
 --     name VARCHAR(20) NOT NULL,

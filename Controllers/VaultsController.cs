@@ -67,7 +67,7 @@ namespace keepr.Controllers
     //CREATE api/vaults
     [Authorize]
     [HttpPost]
-    public ActionResult<Vault> Post(Vault value)
+    public ActionResult<Vault> Post([FromBody] Vault value)
     {
       try
       {

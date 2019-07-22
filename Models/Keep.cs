@@ -8,10 +8,6 @@ namespace keepr.Models
     [Required]
     public string Name { get; set; }
     public string Description { get; set; }
-    [Required]
-    [MaxLength(20)]
-    [MinLength(6)]
-    // [HttpContext]
     public string UserId { get; set; }
     [Required]
     [Url]

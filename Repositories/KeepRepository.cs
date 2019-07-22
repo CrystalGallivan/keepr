@@ -27,7 +27,7 @@ namespace keepr.Repositories
     {
       try
       {
-        string query = "SELECT * FROM keeps WHERE id = @Id";
+        string query = "SELECT * FROM keeps WHERE id = @id";
         Keep data = _db.QueryFirstOrDefault<Keep>(query, new { id });
         if (data is null) throw new Exception("Invalid Id");
         return data;
@@ -38,26 +38,27 @@ namespace keepr.Repositories
       }
     }
 
-    // public Keep GetBy(Keep value)
-    // {
-    //   //TODO This mehtod may not be necessary
-    //   try
-    //   {
-    //     string query = @"";
-    //     return _db.QueryFirstOrDefault<Keep>(query, value);
-    //   }
-    //   catch (Exception e)
-    //   {
-    //     throw e;
-    //   }
-    // }
+    public IEnumerable<Keep> GetKeepsByUser(string id)
+    {
+      //TODO This mehtod may not be necessary
+      try
+      {
+        string query = @"SELECT * FROM keeps WHERE userId = @id";
+        return _db.Query<Keep>(query, new { id });
+
+      }
+      catch (Exception e)
+      {
+        throw e;
+      }
+    }
 
     public Keep Create(Keep value)
     {
       try
       {
-        string query = @"INSERT INTO keeps (name, description, img, isPrivate)
-                VALUES (@Name, @Description, @Img, @IsPrivate);
+        string query = @"INSERT INTO keeps (name, description, userId, img, isPrivate)
+                VALUES (@Name, @Description, @UserId, @Img, @IsPrivate);
                 SELECT LAST_INSERT_ID();
                 ";
         int id = _db.ExecuteScalar<int>(query, value);
@@ -90,6 +91,11 @@ namespace keepr.Repositories
       {
         throw e;
       }
+    }
+
+    internal object GetUserById(object id)
+    {
+      throw new NotImplementedException();
     }
 
     public string Delete(int id)

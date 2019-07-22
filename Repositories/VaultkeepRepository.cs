@@ -22,12 +22,32 @@ namespace keepr.Repositories
       }
     }
 
-    public Vaultkeep GetById(int id)
+    // public IEnumerable<Vaultkeep> GetById(int vaultId, string userId)
+    // {
+    //   try
+    //   {
+    //     string query = @"
+    //     SELECT * FROM vaultkeeps vk
+    //     INNER JOIN keeps k ON k.id = vk.keepId
+    //     WHERE(vaultId = @vaultId AND vk.userId = @userId)";
+    //     IEnumerable<Vaultkeep> data = _db.Query<Vaultkeep>(query, new { vaultId, userId });
+    //     if (data is null) throw new Exception("Invalid Id");
+    //     return data;
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     throw e;
+    //   }
+    // }
+    public IEnumerable<Keep> GetById(int vaultId, string userId)
     {
       try
       {
-        string query = "SELECT * FROM vaultkeeps WHERE id = @Id";
-        Vaultkeep data = _db.QueryFirstOrDefault<Vaultkeep>(query, new { id });
+        string query = @"
+        SELECT * FROM vaultkeeps vk
+        INNER JOIN keeps k ON k.id = vk.keepId
+        WHERE(vaultId = @vaultId AND vk.userId = @userId)";
+        IEnumerable<Keep> data = _db.Query<Keep>(query, new { vaultId, userId });
         if (data is null) throw new Exception("Invalid Id");
         return data;
       }
@@ -36,27 +56,13 @@ namespace keepr.Repositories
         throw e;
       }
     }
-
-    // public Vaultkeep GetBy(Vaultkeep value)
-    // {
-    //   //TODO This mehtod may not be necessary
-    //   try
-    //   {
-    //     string query = @"";
-    //     return _db.QueryFirstOrDefault<Vaultkeep>(query, value);
-    //   }
-    //   catch (Exception e)
-    //   {
-    //     throw e;
-    //   }
-    // }
-
     public Vaultkeep Create(Vaultkeep value)
     {
       try
       {
-        string query = @"INSERT INTO vaultkeeps (vaultId, keepId)
-                VALUES (@VaultId, @KeepId);
+
+        string query = @"INSERT INTO vaultkeeps (vaultId, keepId, userId)
+                VALUES (@VaultId, @KeepId, @userId);
                 SELECT LAST_INSERT_ID();
                 ";
         int id = _db.ExecuteScalar<int>(query, value);
@@ -69,19 +75,21 @@ namespace keepr.Repositories
       }
     }
 
-    public Vaultkeep Update(Vaultkeep value)
+    public string Delete(Vaultkeep value)
     {
       try
       {
         string query = @"
-        UPDATE vaultkeeps
-        SET
-        vaultId = @VaultId,
-        keepId = @KeepId
-        WHERE id = @Id;
-        SELECT * FROM vaultkeeps WHERE id = @Id;
+        DELETE FROM vaultkeeps
+        WHERE (
+        vaultId = @VaultId AND
+        keepId = @KeepId AND
+        userId = @UserId);
         ";
-        return _db.QueryFirstOrDefault<Vaultkeep>(query, value);
+        // SELECT * FROM vaultkeeps WHERE userId = @UserId;
+        Vaultkeep data = _db.QueryFirstOrDefault<Vaultkeep>(query, value);
+        if (data != null) throw new Exception("VaultKeep did not delete.");
+        return "Successfuly Deleted";
       }
       catch (Exception e)
       {
@@ -89,19 +97,5 @@ namespace keepr.Repositories
       }
     }
 
-    public string Delete(int id)
-    {
-      try
-      {
-        string query = "DELETE FROM vaultkeeps WHERE id = @id;";
-        int changedRows = _db.Execute(query, new { id });
-        if (changedRows < 1) throw new Exception("Invalid Id");
-        return "Successfully Deleted";
-      }
-      catch (Exception e)
-      {
-        throw e;
-      }
-    }
   }
 }

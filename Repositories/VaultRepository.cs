@@ -26,7 +26,7 @@ namespace keepr.Repositories
     {
       try
       {
-        string query = "SELECT * FROM vaults WHERE id = @Id";
+        string query = "SELECT * FROM vaults WHERE id = @id";
         Vault data = _db.QueryFirstOrDefault<Vault>(query, new { id });
         if (data is null) throw new Exception("Invalid Id");
         return data;
