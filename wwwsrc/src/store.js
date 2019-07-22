@@ -16,7 +16,11 @@ let api = Axios.create({
 
 export default new Vuex.Store({
   state: {
-    user: {}
+    user: {},
+    keeps: [],
+    keep: {},
+    vaults: [],
+    vault: {}
   },
   mutations: {
     setUser(state, user) {
@@ -25,9 +29,23 @@ export default new Vuex.Store({
     resetState(state) {
       //clear the entire state object of user data
       state.user = {}
+    },
+    setKeep(state, keep) {
+      state.keep = keep
+    },
+    setKeeps(state, keeps) {
+      state.keeps = keeps
+    },
+    setVault(state, vault) {
+      state.vault = vault
+    },
+    setVaults(state, vaults) {
+      state.vaults = vaults
     }
+
   },
   actions: {
+    //#region Auth
     async register({ commit, dispatch }, creds) {
       try {
         let user = await AuthService.Register(creds)
@@ -55,6 +73,62 @@ export default new Vuex.Store({
       } catch (e) {
         console.warn(e.message)
       }
+    },
+    //#endregion Auth
+
+
+    //#region keeps
+    async getAllKeeps({ commit, dispatch }) {
+      try {
+        let res = await api.get("keeps")
+        console.log(res)
+        commit("setKeeps", res.data)
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    async getKeepsById({ commit, dispatch }, id) {
+      try {
+        let res = await api.get("keeps/" + id)
+        console.log(res)
+        commit("setKeep", res.data)
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    async getByUser({ commit, dispatch }, user) {
+      try {
+        let res = await api.get("keeps/user", user)
+        console.log(res)
+        commit("setKeeps", res.data)
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    async CreateKeep({ commit, dispatch }, payload) {
+      try {
+        let res = await api.post("keeps", payload)
+        console.log(res)
+        dispatch("getAllKeeps")
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    async EditKeep({ commit, dispatch }, payload) {
+      try {
+        let res = await api.put("keeps/" + payload.id, payload)
+        console.log(res)
+        dispatch("getAllKeeps")
+      } catch (e) {
+        console.error(e)
+      }
     }
+
+    //#endregion keeps
+
+
+    //#region vaults
+    //#endregion vaults
+
   }
 })

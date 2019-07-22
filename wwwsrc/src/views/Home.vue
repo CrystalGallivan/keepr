@@ -1,23 +1,36 @@
 <template>
-  <div class="home">
+  <div class="home container-fluid">
     <h1>Welcome Home {{user.username}}</h1>
     <button v-if="user.id" @click="logout">logout</button>
     <router-link v-else :to="{name: 'login'}">Login</router-link>
+    <div class="row">
+      <keeps v-for="keep in keeps" :keep="keep" />
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: "home",
-  computed: {
-    user() {
-      return this.$store.state.user;
+  import Keeps from "@/components/Keeps.vue"
+  export default {
+    name: "home",
+    computed: {
+      user() {
+        return this.$store.state.user;
+      },
+      keeps() {
+        return this.$store.state.keeps;
+      }
+    },
+    mounted() {
+      this.$store.dispatch("getAllKeeps")
+    },
+    methods: {
+      logout() {
+        this.$store.dispatch("logout");
+      }
+    },
+    components: {
+      Keeps
     }
-  },
-  methods: {
-    logout() {
-      this.$store.dispatch("logout");
-    }
-  }
-};
+  };
 </script>

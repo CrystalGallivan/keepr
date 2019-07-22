@@ -35,21 +35,6 @@ namespace keepr.Controllers
     //GET BY ID api/vaultkeeps/vaultId
     [Authorize]
     [HttpGet("{vaultId}")]
-    // (DataVaultkeep)
-    // public ActionResult<IEnumerable<Vaultkeep>> Get(int vaultId)
-    // {
-    //   try
-    //   {
-    //     var userId = HttpContext.User.FindFirstValue("Id");
-
-    //     return Ok(_repo.GetById(vaultId, userId));
-    //   }
-    //   catch (Exception e)
-    //   {
-
-    //     return BadRequest(e);
-    //   }
-    // }
     public ActionResult<IEnumerable<Keep>> Get(int vaultId)
     {
       try
