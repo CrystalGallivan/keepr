@@ -119,6 +119,13 @@ export default new Vuex.Store({
         console.error(e)
       }
     },
+    SelectKeep({ commit, dispatch }) {
+      try {
+        commit("setKeep")
+      } catch (e) {
+        console.log(e)
+      }
+    },
     async EditKeep({ commit, dispatch }, payload) {
       try {
         let res = await api.put("keeps/" + payload.id, payload)
@@ -205,16 +212,16 @@ export default new Vuex.Store({
     async AddKeepToVault({ commit, dispatch }, payload) {
       try {
         let res = await api.post("vaultkeeps", payload)
-        dispatch("getVaults", "getKeeps")
+        dispatch("getAllVaults", "getKeeps")
         console.log(res)
       } catch (e) {
         console.error(e)
       }
     },
-    async RemoveKeepToVault({ commit, dispatch }, payload) {
+    async RemoveKeepFromVault({ commit, dispatch }, payload) {
       try {
         let res = await api.put("vaultkeeps", payload)
-        dispatch("getVaults", "getKeeps")
+        dispatch("getAllVaults", "getKeeps")
         console.log(res)
       } catch (e) {
         console.error(e)

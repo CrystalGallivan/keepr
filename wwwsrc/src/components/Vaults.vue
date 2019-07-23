@@ -28,7 +28,7 @@
     },
     methods: {
       Delete() {
-        this.$store.dispatch("DeleteKeep", vault.id)
+        this.$store.dispatch("DeleteVault", this.vault.id)
       }
     }
   }
