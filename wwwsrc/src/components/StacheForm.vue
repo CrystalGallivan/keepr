@@ -1,46 +1,37 @@
 <template>
-  <div class="keep-form">
-    <form @submit.prevent="AddKeep">
-      <h1>Make a Keep</h1>
+  <div class="stache-form">
+    <!-- <div class="tab-pane fade" id="nav-stache" role="tabpanel" aria-labelledby="nav-stache-tab"> -->
+    <form @submit.prevent="AddStache">
+      <h1>Make a Stache</h1>
       <div class="form-group mb-2">
         <label for="title" class="sr-only">Title</label>
-        <input v-model="newKeep.name" type="text" class="form-control-plaintext rounded" id="title" value="Title">
+        <input v-model="newVault.name" type="text" class="form-control-plaintext rounded" id="title" value="Title">
       </div>
       <div class="form-group mb-2">
         <label for="description" class="sr-only">Description</label>
-        <textarea v-model="newKeep.description" type="text" class="form-control-plaintext rounded" id="description"
+        <textarea v-model="newVault.description" type="text" class="form-control-plaintext rounded" id="description"
           value="Description"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="image">Image</label>
-        <input v-model="newKeep.img" type="url" class="form-control-plaintext rounded" id="image">
-      </div>
-      <div class="custom-control custom-switch">
-        <input v-model="newKeep.isPrivate" type="checkbox" class="custom-control-input rounded" id="isPrivate">
-        <label class="custom-control-label" for="isPrivate">Keep Private?</label>
       </div>
       <button class="btn btn-outline-dark" type="submit">Post</button>
     </form>
-  </div>
+    <!-- </div> -->
   </div>
 </template>
 <script>
   export default {
-    name: "KeepForm",
+    name: "StacheForm",
     data() {
       return {
-        newKeep: {
+        newVault: {
           name: '',
-          description: '',
-          img: '',
-          isPrivate: false
+          description: ''
         }
       }
     },
     methods: {
-      AddKeep() {
-        this.$store.dispatch("CreateKeep", this.newKeep)
-        this.newKeep = {}
+      AddStache() {
+        this.$store.dispatch("CreateVault", this.newVault)
+        this.newVault = {}
       }
     }
 
@@ -48,17 +39,12 @@
   }
 </script>
 <style scoped>
-  /* #card-form {
-    padding: 20px;
-    background-color: white;
-  } */
-
   h1 {
     font-family: 'Lobster', cursive;
   }
 
-  .keep-form {
-    padding: 200px;
+  .stache-form {
+    padding: 47px;
     display: flex;
     justify-content: center;
     align-content: center;

@@ -161,6 +161,7 @@ export default new Vuex.Store({
         let res = await api.post("vaults", payload)
         console.log(res)
         dispatch("getAllVaults")
+        router.push("/vaults")
       } catch (e) {
         console.error(e)
       }
@@ -186,5 +187,35 @@ export default new Vuex.Store({
 
     //#endregion vaults
 
+
+    //#region VaultKeeps
+    async getKeepsByVault({ commit, dispatch }, id) {
+      try {
+        let res = await api.get("vaultkeeps/" + id)
+        commit("setKeeps")
+        console.log(res)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async AddKeepToVault({ commit, dispatch }, payload) {
+      try {
+        let res = await api.post("vaultkeeps", payload)
+        dispatch("getVaults", "getKeeps")
+        console.log(res)
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    async RemoveKeepToVault({ commit, dispatch }, payload) {
+      try {
+        let res = await api.put("vaultkeeps", payload)
+        dispatch("getVaults", "getKeeps")
+        console.log(res)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+    //#endregion VaultKeeps
   }
 })

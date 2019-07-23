@@ -8,7 +8,9 @@
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
-        <button class="btn btn-light">My Staches</button>
+        <button class="btn btn-light">
+          <router-link to="/vaults">My Staches</router-link>
+        </button>
         <!-- TODO rename this to something to do with mustaches -->
         <button class="btn btn-light" to="/keeps">
           <router-link to="/keeps">My Keeps</router-link>

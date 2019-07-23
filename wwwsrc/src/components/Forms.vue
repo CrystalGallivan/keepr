@@ -1,5 +1,6 @@
 <template>
   <div class="keep-form">
+    <!-- <div class="tab-pane fade show active" id="nav-keeps" role="tabpanel" aria-labelledby="nav-keeps-tab"> -->
     <form @submit.prevent="AddKeep">
       <h1>Make a Keep</h1>
       <div class="form-group mb-2">
@@ -21,7 +22,7 @@
       </div>
       <button class="btn btn-outline-dark" type="submit">Post</button>
     </form>
-  </div>
+    <!-- </div> -->
   </div>
 </template>
 <script>
@@ -58,7 +59,7 @@
   }
 
   .keep-form {
-    padding: 200px;
+    padding: 47px;
     display: flex;
     justify-content: center;
     align-content: center;

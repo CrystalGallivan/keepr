@@ -5,22 +5,31 @@
     </div>
     <div class="row" id="create-forms">
       <div class="card rounded" id="card-form">
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs" id="nav-tab" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" href="#">Keeps</a>
+            <a class="nav-link active" id="nav-keeps-tab" data-toggle="tab" href="#nav-keeps" role="tab"
+              aria-controls="nav-keeps" aria-selected="true">Keeps</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Staches</a>
+            <a class="nav-link" id="nav-stache-tab" data-toggle="tab" href="#nav-stache" role="tab"
+              aria-controls="nav-stache">Staches</a>
           </li>
         </ul>
-        <stach-form />
-        <keep-form />
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade" id="nav-stache" role="tabpanel" aria-labelledby="nav-stache-tab">
+            <stache-form />
+          </div>
+          <div class="tab-pane fade show active" id="nav-keeps" role="tabpanel" aria-labelledby="nav-keeps-tab">
+            <keep-form />
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
   import KeepForm from "@/components/Forms.vue"
+  import StacheForm from "@/components/StacheForm.vue"
   export default {
     name: "MyDashboard",
     data() {
@@ -30,7 +39,8 @@
     },
 
     components: {
-      KeepForm
+      KeepForm,
+      StacheForm
     }
 
 
