@@ -46,7 +46,7 @@
         },
         computed: {
             keeps() {
-                return this.$store.state.keeps;
+                return this.$store.state.publicKeeps;
             }
         },
         mounted() {

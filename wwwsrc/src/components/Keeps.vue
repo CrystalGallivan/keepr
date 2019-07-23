@@ -41,7 +41,7 @@
     },
     methods: {
       Stache() {
-        this.$store.dispatch("addToStache")
+        this.$store.dispatch("AddKeepToVault")
       },
       Share() {
         this.$store.dispatch("makePublic")

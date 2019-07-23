@@ -2,8 +2,8 @@
   <div id="app">
     <nav class="container-fluid navbar fixed-bottom navbar-light bg-light">
       <div class="row" id="navbar">
-        <a class="navbar-brand" to="/">Stache</a>
-        <img src="assets/icons8-english-mustache-50.png" alt="">
+        <img src="../src/assets/icons8-english-mustache-100.png" alt="">
+        <a class="navbar-brand" style="font-family: 'Lobster', cursive; font-size: 55px" to="/">Stache</a>
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>

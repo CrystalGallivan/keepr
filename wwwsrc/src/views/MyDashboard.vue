@@ -1,7 +1,9 @@
 <template>
   <div class="my-dashboard contianer-fluid">
-    <div class="row">
-      <h1>Welcome to the Dashboard Where you can manage your Staches and Keeps</h1>
+    <div class="row" id="dashboard-header">
+      <img src="../assets/icons8-english-mustache-50-w.png" alt="">
+      <h1 style="padding-left: 10px; padding-right: 10px;">Stache</h1>
+      <img src="../assets/icons8-english-mustache-50-w.png" alt="">
     </div>
     <div class="row" id="create-forms">
       <div class="card rounded" id="card-form">
@@ -51,6 +53,18 @@
     display: flex;
     justify-content: center;
     padding: 47px;
+  }
+
+  h1 {
+    color: white;
+    font-family: 'Lobster', cursive;
+    font-size: 65px;
+  }
+
+  #dashboard-header {
+    display: flex;
+    justify-content: center;
+    /* justify-content: space-evenly; */
   }
 
   #card-form {
