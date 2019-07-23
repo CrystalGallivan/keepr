@@ -15,10 +15,14 @@
             <p v-if="loginForm">No account Click to Register</p>
             <p v-else>Already have an account click to Login</p>
         </div>
+        <div class="row" id="keep-cards">
+            <keeps v-for="keep in keeps" :keep="keep" />
+        </div>
     </div>
 </template>
 
 <script>
+    import Keeps from "@/components/Keeps.vue"
     export default {
         name: "login",
         data() {
@@ -35,10 +39,18 @@
                 }
             };
         },
-        beforeCreate(){
-            if(this.$store.state.user.id){
-                this.$router.push({name: "home"})
+        beforeCreate() {
+            if (this.$store.state.user.id) {
+                this.$router.push({ name: "home" })
             }
+        },
+        computed: {
+            keeps() {
+                return this.$store.state.keeps;
+            }
+        },
+        mounted() {
+            this.$store.dispatch("getAllKeeps")
         },
         methods: {
             register() {
@@ -47,6 +59,9 @@
             loginUser() {
                 this.$store.dispatch("login", this.creds);
             }
+        },
+        components: {
+            Keeps
         }
     };
 </script>

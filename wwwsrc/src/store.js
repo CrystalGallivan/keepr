@@ -110,6 +110,7 @@ export default new Vuex.Store({
         let res = await api.post("keeps", payload)
         console.log(res)
         dispatch("getAllKeeps")
+        router.push("/")
       } catch (e) {
         console.error(e)
       }
@@ -122,12 +123,67 @@ export default new Vuex.Store({
       } catch (e) {
         console.error(e)
       }
-    }
+    },
+    async DeleteKeep({ commit, dispatch }, id) {
+      try {
+        let res = await api.delete("keeps/" + id)
+        console.log(res)
+        dispatch("getAllKeeps")
+      } catch (e) {
+        console.error(e)
+      }
+    },
 
     //#endregion keeps
 
 
     //#region vaults
+    async getAllVaults({ commit, dispatch }) {
+      try {
+        let res = await api.get("vaults")
+        console.log(res)
+        commit("setVaults", res.data)
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    async getVaultsById({ commit, dispatch }, id) {
+      try {
+        let res = await api.get("vaults/" + id)
+        console.log(res)
+        commit("setVault", res.data)
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    async CreateVault({ commit, dispatch }, payload) {
+      try {
+        let res = await api.post("vaults", payload)
+        console.log(res)
+        dispatch("getAllVaults")
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    async EditVault({ commit, dispatch }, payload) {
+      try {
+        let res = await api.put("vaults/" + payload.id, payload)
+        console.log(res)
+        dispatch("getAllVaults")
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    async DeleteVault({ commit, dispatch }, id) {
+      try {
+        let res = await api.delete("vaults/" + id)
+        console.log(res)
+        dispatch("getAllVaults")
+      } catch (e) {
+        console.error(e)
+      }
+    },
+
     //#endregion vaults
 
   }

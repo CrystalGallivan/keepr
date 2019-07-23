@@ -6,6 +6,8 @@ import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 // @ts-ignore
 import UserKeeps from './views/UserKeeps.vue'
+// @ts-ignore
+import MyDashboard from './views/MyDashboard.vue'
 
 Vue.use(Router)
 
@@ -25,6 +27,11 @@ export default new Router({
       path: '/keeps',
       name: 'UserKeeps',
       component: UserKeeps
+    },
+    {
+      path: '/dashboards',
+      name: 'MyDashboard',
+      component: MyDashboard
     }
   ]
 })
