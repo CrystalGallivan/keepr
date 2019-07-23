@@ -16,7 +16,7 @@
             <p v-else>Already have an account click to Login</p>
         </div>
         <div class="row" id="keep-cards">
-            <keeps v-for="keep in keeps" :keep="keep" />
+            <keeps v-if="keep.isPrivate == false" v-for="keep in keeps" :keep="keep" />
         </div>
     </div>
 </template>

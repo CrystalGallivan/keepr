@@ -5,8 +5,10 @@
       <div class="card-body">
         <img :src="keep.img" width="300px" alt="I'm not here">
       </div>
-      <small id="icons"><img src="../assets/icons8-eye-18.png" alt="">{{keep.views}}<img
-          src="../assets/icons8-english-mustache-18.png" alt="">{{keep.keeps}}</small>
+      <small id="icons">
+        <img v-if="keep.isPrivate == true" src="../assets/icons8-secure-18.png" alt="">
+        <img src="../assets/icons8-eye-18.png" alt="">{{keep.views}}
+        <img src="../assets/icons8-english-mustache-18.png" alt="">{{keep.keeps}}</small>
       <h4><b>
           <div class="keep-title">{{keep.name}}</div>
         </b>
@@ -14,7 +16,7 @@
       <div class="card-footer">{{keep.description}}
         <!-- TODO Don't forget to remove this! -->
 
-        <!-- <div class="status">{{keep.isPrivate}}-{{keep.keeps}}-{{keep.views}} </div> -->
+        <div class="status">{{keep.isPrivate}}</div>
         <div id="actions">
           <!-- TODO Figure out how to pass the keep id -->
           <div class="dropdown">
@@ -23,8 +25,8 @@
               <img src="../assets/icons8-english-mustache-50.png" height="30px" alt="I'm not here">
             </button>
             <div class="dropdown-menu" aria-labelledby="vaultDropDown">
-              <a class="dropdown-item" @click="Stache(vault.id)" :value="vault.id" v-for="vault in vaults"
-                href="#">{{vault.name}}-{{vault.id}}</a>
+              <a class="dropdown-item" v-if="vault.userId == user.id" @click="Stache(vault.id)" :value="vault.id"
+                v-for="vault in vaults" href="#">{{vault.name}}</a>
 
             </div>
           </div>
@@ -34,7 +36,7 @@
           <button class="btn rounded-circle btn-light" title="Edit">
             <img src="../assets/icons8-pencil-20.png" alt="I'm not here">
           </button>
-          <button @click="Delete()" class="btn rounded-circle btn-light" title="Delete">
+          <button @click="Delete()" v-if="keep.isPrivate == true" class="btn rounded-circle btn-light" title="Delete">
             <img src="../assets/icons8-trash-can-30.png" alt="I'm not here">
           </button>
         </div>
@@ -69,6 +71,7 @@
     methods: {
       Views() {
         this.keep.views += 1
+        this.$store.dispatch("EditKeep", this.keep)
       },
       Stache(id) {
         this.vaultKeep.keepId = this.keep.id

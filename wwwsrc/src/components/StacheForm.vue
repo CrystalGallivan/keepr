@@ -12,7 +12,7 @@
         <textarea v-model="newVault.description" type="text" class="form-control-plaintext rounded" id="description"
           value="Description"></textarea>
       </div>
-      <button class="btn btn-outline-dark" type="submit">Post</button>
+      <button class="btn btn-outline-dark" type="submit">Create Stache</button>
     </form>
     <!-- </div> -->
   </div>

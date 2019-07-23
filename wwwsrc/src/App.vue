@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <nav class="container-fluid navbar fixed-bottom navbar-light bg-light">
+    <nav class="container-fluid navbar fixed-top navbar-light bg-light">
       <div class="row" id="navbar">
-        <img src="../src/assets/icons8-english-mustache-100.png" alt="">
+        <router-link to="/">
+          <img src="../src/assets/icons8-english-mustache-100.png" alt="">
+        </router-link>
         <a class="navbar-brand" style="font-family: 'Lobster', cursive; font-size: 55px" to="/">Stache</a>
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -52,7 +54,7 @@
   }
 
   .navbar {
-    height: 75px;
+    height: 125px;
     display: flex;
     justify-content: center;
     align-content: space-between;

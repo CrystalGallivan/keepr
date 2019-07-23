@@ -26,6 +26,9 @@
     data() {
       return {}
     },
+    mounted() {
+      this.$store.dispatch("getKeepsByVault")
+    },
     methods: {
       Delete() {
         this.$store.dispatch("DeleteVault", this.vault.id)

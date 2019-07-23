@@ -37,20 +37,6 @@ namespace keepr.Repositories
       }
     }
 
-    // public Vault GetBy(Vault value)
-    // {
-    //   //TODO This mehtod may not be necessary
-    //   try
-    //   {
-    //     string query = @"";
-    //     return _db.QueryFirstOrDefault<Vault>(query, value);
-    //   }
-    //   catch (Exception e)
-    //   {
-    //     throw e;
-    //   }
-    // }
-
     public Vault Create(Vault value)
     {
       try
@@ -89,12 +75,12 @@ namespace keepr.Repositories
       }
     }
 
-    public string Delete(int id)
+    public string Delete(int id, string userId)
     {
       try
       {
-        string query = "DELETE FROM vaults WHERE id = @id;";
-        int changedRows = _db.Execute(query, new { id });
+        string query = "DELETE FROM vaults WHERE id = @id AND userId = @UserId;";
+        int changedRows = _db.Execute(query, new { id, userId });
         if (changedRows < 1) throw new Exception("Invalid Id");
         return "Successfully Deleted";
       }
