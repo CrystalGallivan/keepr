@@ -16,7 +16,7 @@
             <button class="btn btn-outline-dark" type="submit">Search</button>
           </form>
         </div>
-        <div class="nav-item-3">
+        <div v-if="user.id" class="nav-item-3">
           <button class="btn btn-light btn-sm">
             <router-link to="/vaults">My Staches</router-link>
           </button>
@@ -26,6 +26,11 @@
           </button>
           <button class="btn btn-light btn-sm" to="/dashboards">
             <router-link to="/dashboards">My Dashboard</router-link>
+          </button>
+        </div>
+        <div v-else class="nav-item-3">
+          <button type="button" id="login-button" class="btn btn-light" data-toggle="modal" data-target="#loginModal">
+            Login
           </button>
         </div>
       </div>
@@ -40,6 +45,11 @@
     data() {
       return {
 
+      }
+    },
+    computed: {
+      user() {
+        return this.$store.state.user
       }
     },
     components: {

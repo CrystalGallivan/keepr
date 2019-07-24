@@ -14,11 +14,7 @@
         </b>
       </h4>
       <div class="card-footer">{{keep.description}}
-        <!-- TODO Don't forget to remove this! -->
-
-        <div class="status">{{keep.isPrivate}}</div>
         <div id="actions">
-          <!-- TODO Figure out how to pass the keep id -->
           <div class="dropdown">
             <button class="btn rounded-circle btn-light dropdown-toggle" type="button" id="vaultDropDown"
               title="Add to My Stache" data-toggle="dropdown" aria-haspopup="true" arie-expanded="fasle">
@@ -63,7 +59,6 @@
     },
     watch: {
       Keeps() {
-        debugger
         this.$store.dispatch("EditKeep", this.keep)
       }
     },
@@ -90,12 +85,12 @@
         // TODO add a sweetalert
         // Vue.swal('Keep added to Stache');
       },
-      Share() {
-        this.$store.dispatch("makePublic")
-      },
-      Edit() {
-        this.$store.dispatch("EditKeep")
-      },
+      // Share() {
+      //   this.$store.dispatch("makePublic")
+      // },
+      // Edit() {
+      //   this.$store.dispatch("EditKeep")
+      // },
       Delete() {
         this.$store.dispatch("DeleteKeep", this.keep.id)
       }
