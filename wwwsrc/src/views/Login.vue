@@ -15,8 +15,10 @@
             <p v-if="loginForm">No account Click to Register</p>
             <p v-else>Already have an account click to Login</p>
         </div>
-        <div class="row" id="keep-cards">
-            <keeps v-if="keep.isPrivate == false" v-for="keep in keeps" :keep="keep" />
+        <div class="container-fluid">
+            <div class="row" id="keep-cards">
+                <keeps v-if="keep.isPrivate == false" v-for="keep in keeps" :keep="keep" />
+            </div>
         </div>
     </div>
 </template>
@@ -65,3 +67,9 @@
         }
     };
 </script>
+<style scoped>
+    #keep-cards {
+        display: flex;
+        justify-content: center;
+    }
+</style>

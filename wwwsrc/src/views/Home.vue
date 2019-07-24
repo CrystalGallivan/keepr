@@ -1,10 +1,16 @@
 <template>
   <div class="home">
-    <div class="container-fluid navbar fixed-top navbar-light" id="top-navbar">
-      <div class="row" id="nav-row">
-        <h4>Welcome {{user.username}}</h4>
+    <div class="container-fluid navbar navbar-light" id="top-navbar">
+      <div class="row" id="nav-row-1">
+
+        <p>Welcome {{user.username}}</p>
+      </div>
+
+      <div class="row">
+
         <button class="btn btn-light btn-sm" v-if="user.id" @click="logout">Logout</button>
         <router-link v-else :to="{name: 'login'}">Login</router-link>
+
       </div>
     </div>
     <div class="row" id="keep-cards">
@@ -40,17 +46,17 @@
 </script>
 <style scoped>
   #top-navbar {
-    background-color: #fff;
-    color: black;
-    font-family: 'Pacifico', cursive;
-    height: 40px;
-    font-size: 10px;
-  }
-
-  #navrow {
+    /* background-color: #fff; */
+    /* outline: 2px;
+    outline-color: white;
+    outline-width: 2rem; */
     display: flex;
-    justify-content: space-between;
-    align-content: space-between;
+    justify-content: space-evenly;
+    color: whitesmoke;
+    font-family: 'Lobster', cursive;
+    height: 40px;
+    font-size: 50px;
+    margin-top: -10px
   }
 
   .navbar {
