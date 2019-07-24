@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <router-view />
     <nav class="container-fluid navbar fixed-bottom navbar-light bg-light">
       <div class="row" id="navbar">
         <div class="nav-item-1">
@@ -29,7 +30,7 @@
         </div>
       </div>
     </nav>
-    <router-view />
+
   </div>
 </template>
 

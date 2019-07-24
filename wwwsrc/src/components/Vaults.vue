@@ -3,9 +3,12 @@
     <div class="card " id="vaults-card">
       <div class="card-body">
       </div>
-      <keeps-in-vault v-for="vkeep in vaultKeeps" :vkeep="vkeep" />
+
       <h4><b>
-          <div class="vault-title">{{vault.name}}</div>
+          <!-- <a style="color: black;"> -->
+          <div @click="openVault" class="vault-title">{{vault.name}}</div>
+          <!-- </a> -->
+
         </b></h4>
       <div class="card-footer">{{vault.description}}
         <div id="actions">
@@ -21,7 +24,7 @@
 </template>
 <!-- shadow p-3 mb-5 bg-white rounded -->
 <script>
-  import KeepsInVault from '@/components/KeepsInVault.vue'
+  import Stache from '@/views/Stache.vue'
   export default {
     name: "Vaults",
     props: ["vault"],
@@ -36,10 +39,13 @@
     methods: {
       Delete() {
         this.$store.dispatch("DeleteVault", this.vault.id)
+      },
+      openVault() {
+        this.$store.dispatch("getKeepsByVault", this.vault.id)
       }
     },
     components: {
-      KeepsInVault
+      Stache
     }
   }
 </script>
@@ -58,10 +64,16 @@
     justify-content: space-evenly;
   }
 
+  .card {
+    height: 400px;
+    width: 500px;
+  }
+
   #cards {
     display: flex;
     align-items: center;
     padding: 30px;
+
   }
 
   /* #vaults-card {} */

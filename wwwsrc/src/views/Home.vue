@@ -2,7 +2,7 @@
   <div class="home">
     <div class="container-fluid navbar fixed-top navbar-light" id="top-navbar">
       <div class="row" id="nav-row">
-        <h4>Welcome Home {{user.username}}</h4>
+        <h4>Welcome {{user.username}}</h4>
         <button class="btn btn-light btn-sm" v-if="user.id" @click="logout">Logout</button>
         <router-link v-else :to="{name: 'login'}">Login</router-link>
       </div>
@@ -40,13 +40,11 @@
 </script>
 <style scoped>
   #top-navbar {
-
     background-color: #fff;
     color: black;
     font-family: 'Pacifico', cursive;
     height: 40px;
     font-size: 10px;
-
   }
 
   #navrow {

@@ -10,6 +10,8 @@ import UserKeeps from './views/UserKeeps.vue'
 import MyDashboard from './views/MyDashboard.vue'
 // @ts-ignore
 import VaultKeeps from './views/VaultKeeps.vue'
+// @ts-ignore
+import Stache from './views/Stache.vue'
 
 Vue.use(Router)
 
@@ -39,6 +41,11 @@ export default new Router({
       path: '/vaults',
       name: 'VaultKeeps',
       component: VaultKeeps
+    },
+    {
+      path: '/stache',
+      name: 'Stache',
+      component: Stache
     }
   ]
 })

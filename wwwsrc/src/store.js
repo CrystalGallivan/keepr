@@ -90,7 +90,7 @@ export default new Vuex.Store({
     async getAllKeeps({ commit, dispatch }) {
       try {
         let res = await api.get("keeps")
-        console.log(res)
+        // console.log(res)
         commit("setPublicKeeps", res.data)
       } catch (e) {
         console.error(e)
@@ -99,7 +99,7 @@ export default new Vuex.Store({
     async getKeepsById({ commit, dispatch }, id) {
       try {
         let res = await api.get("keeps/" + id)
-        console.log(res)
+        // console.log(res)
         commit("setUserKeep", res.data)
       } catch (e) {
         console.error(e)
@@ -108,7 +108,7 @@ export default new Vuex.Store({
     async getByUser({ commit, dispatch }, user) {
       try {
         let res = await api.get("keeps/user", user)
-        console.log(res)
+        // console.log(res)
         commit("setUserKeeps", res.data)
       } catch (e) {
         console.error(e)
@@ -117,7 +117,7 @@ export default new Vuex.Store({
     async CreateKeep({ commit, dispatch }, payload) {
       try {
         let res = await api.post("keeps", payload)
-        console.log(res)
+        // console.log(res)
         dispatch("getAllKeeps")
         router.push("/")
       } catch (e) {
@@ -134,7 +134,7 @@ export default new Vuex.Store({
     async EditKeep({ commit, dispatch }, payload) {
       try {
         let res = await api.put("keeps/" + payload.id, payload)
-        console.log(res)
+        // console.log(res)
         dispatch("getAllKeeps")
       } catch (e) {
         console.error(e)
@@ -143,7 +143,7 @@ export default new Vuex.Store({
     async DeleteKeep({ commit, dispatch }, id) {
       try {
         let res = await api.delete("keeps/" + id)
-        console.log(res)
+        // console.log(res)
         dispatch("getAllKeeps")
         dispatch("getByUser")
       } catch (e) {
@@ -158,12 +158,12 @@ export default new Vuex.Store({
     async getAllVaults({ commit, dispatch }) {
       try {
         let res = await api.get("vaults")
-        console.log(res)
+        // console.log(res)
         commit("setVaults", res.data)
-        res.data.forEach(v => {
-          v.id
-          dispatch("getVaultsById", v.id)
-        });
+        // res.data.forEach(v => {
+        //   v.id
+        //   dispatch("getVaultsById", v.id)
+        // });
       } catch (e) {
         console.error(e)
       }
@@ -171,9 +171,9 @@ export default new Vuex.Store({
     async getVaultsById({ commit, dispatch }, id) {
       try {
         let res = await api.get("vaults/" + id)
-        console.log(res)
-        // commit("setVault", res.data)
-        dispatch("getKeepsByVault", id)
+        // console.log(res)
+        commit("setVault", res.data)
+        // dispatch("getKeepsByVault", id)
       } catch (e) {
         console.error(e)
       }
@@ -181,7 +181,7 @@ export default new Vuex.Store({
     async CreateVault({ commit, dispatch }, payload) {
       try {
         let res = await api.post("vaults", payload)
-        console.log(res)
+        // console.log(res)
         dispatch("getAllVaults")
         router.push("/vaults")
       } catch (e) {
@@ -191,7 +191,7 @@ export default new Vuex.Store({
     async EditVault({ commit, dispatch }, payload) {
       try {
         let res = await api.put("vaults/" + payload.id, payload)
-        console.log(res)
+        // console.log(res)
         dispatch("getAllVaults")
       } catch (e) {
         console.error(e)
@@ -200,7 +200,7 @@ export default new Vuex.Store({
     async DeleteVault({ commit, dispatch }, id) {
       try {
         let res = await api.delete("vaults/" + id)
-        console.log(res)
+        // console.log(res)
         dispatch("getAllVaults")
       } catch (e) {
         console.error(e)
@@ -215,7 +215,9 @@ export default new Vuex.Store({
       try {
         let res = await api.get("vaultkeeps/" + id)
         commit("setVaultKeeps", res.data)
-        console.log(res)
+        commit("setVault", id)
+        router.push("/stache")
+        // console.log(res)
       } catch (e) {
         console.log(e)
       }
@@ -224,7 +226,7 @@ export default new Vuex.Store({
       try {
         let res = await api.post("vaultkeeps", payload)
         dispatch("getAllVaults", "getKeeps")
-        console.log(res)
+        // console.log(res)
       } catch (e) {
         console.error(e)
       }
@@ -233,7 +235,7 @@ export default new Vuex.Store({
       try {
         let res = await api.put("vaultkeeps", payload)
         dispatch("getAllVaults", "getKeeps")
-        console.log(res)
+        // console.log(res)
       } catch (e) {
         console.error(e)
       }
