@@ -57,7 +57,9 @@
           vaultId: 0,
           keepId: 0,
         },
-        // vault: {}
+        keep: {
+          views: ''
+        }
       }
     },
     computed: {
@@ -70,6 +72,7 @@
     },
     methods: {
       Views() {
+        debugger
         this.keep.views += 1
         this.$store.dispatch("EditKeep", this.keep)
       },
@@ -77,7 +80,8 @@
         this.vaultKeep.keepId = this.keep.id
         this.vaultKeep.userId = this.user.id
         this.vaultKeep.vaultId = id
-        this.keep.keeps += 1
+        this.count++
+        this.keep.keeps = this.count
         this.$store.dispatch("AddKeepToVault", this.vaultKeep)
         alert("Keep added to Stache")
       },

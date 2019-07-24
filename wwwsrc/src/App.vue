@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav class="container-fluid navbar fixed-top navbar-light bg-light">
+    <nav class="container-fluid navbar fixed-bottom navbar-light bg-light">
       <div class="row" id="navbar">
         <router-link to="/">
           <img src="../src/assets/icons8-english-mustache-100.png" alt="">
@@ -54,7 +54,7 @@
   }
 
   .navbar {
-    height: 125px;
+    height: 100px;
     display: flex;
     justify-content: center;
     align-content: space-between;
