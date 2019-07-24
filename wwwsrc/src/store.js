@@ -21,7 +21,8 @@ export default new Vuex.Store({
     userKeeps: [],
     keep: {},
     vaults: [],
-    vault: {}
+    vault: {},
+    vaultKeeps: []
   },
   mutations: {
     setUser(state, user) {
@@ -35,10 +36,14 @@ export default new Vuex.Store({
       state.keep = keep
     },
     setPublicKeeps(state, keeps) {
+      // keeps.views.sort(function (a, b) { return a - b })
       state.publicKeeps = keeps
     },
     setUserKeeps(state, userKeeps) {
       state.userKeeps = userKeeps
+    },
+    setVaultKeeps(state, vaultKeeps) {
+      state.vaultKeeps = vaultKeeps
     },
     setVault(state, vault) {
       state.vault = vault
@@ -128,7 +133,6 @@ export default new Vuex.Store({
     },
     async EditKeep({ commit, dispatch }, payload) {
       try {
-        debugger
         let res = await api.put("keeps/" + payload.id, payload)
         console.log(res)
         dispatch("getAllKeeps")
@@ -141,6 +145,7 @@ export default new Vuex.Store({
         let res = await api.delete("keeps/" + id)
         console.log(res)
         dispatch("getAllKeeps")
+        dispatch("getByUser")
       } catch (e) {
         console.error(e)
       }
@@ -155,6 +160,10 @@ export default new Vuex.Store({
         let res = await api.get("vaults")
         console.log(res)
         commit("setVaults", res.data)
+        res.data.forEach(v => {
+          v.id
+          dispatch("getVaultsById", v.id)
+        });
       } catch (e) {
         console.error(e)
       }
@@ -163,7 +172,8 @@ export default new Vuex.Store({
       try {
         let res = await api.get("vaults/" + id)
         console.log(res)
-        commit("setVault", res.data)
+        // commit("setVault", res.data)
+        dispatch("getKeepsByVault", id)
       } catch (e) {
         console.error(e)
       }
@@ -204,7 +214,7 @@ export default new Vuex.Store({
     async getKeepsByVault({ commit, dispatch }, id) {
       try {
         let res = await api.get("vaultkeeps/" + id)
-        commit("setKeeps")
+        commit("setVaultKeeps", res.data)
         console.log(res)
       } catch (e) {
         console.log(e)

@@ -7,16 +7,16 @@
       </div>
       <small id="icons">
         <img v-if="keep.isPrivate == true" src="../assets/icons8-secure-18.png" alt="">
-        <img src="../assets/icons8-eye-18.png" alt="">{{keep.views}}
-        <img src="../assets/icons8-english-mustache-18.png" alt="">{{keep.keeps}}</small>
+        <img src="../assets/icons8-eye-18.png" alt="">{{keep ? keep.views : vkeep.views}}
+        <img src="../assets/icons8-english-mustache-18.png" alt="">{{keep ? keep.keeps : vkeep.keeps}}</small>
       <h4><b>
-          <div class="keep-title">{{keep.name}}</div>
+          <div class="keep-title">{{keep ? keep.name : vkeep.keeps}}</div>
         </b>
       </h4>
-      <div class="card-footer">{{keep.description}}
+      <div class="card-footer">{{keep ? keep.description : vkeep.description}}
         <!-- TODO Don't forget to remove this! -->
 
-        <div class="status">{{keep.isPrivate}}</div>
+        <div class="status">{{keep ? keep.isPrivate : vkeep.isPrivate}}</div>
         <div id="actions">
           <!-- TODO Figure out how to pass the keep id -->
           <div class="dropdown">
@@ -49,17 +49,23 @@
 <script>
   export default {
     name: "keeps",
-    props: ["keep", "vault"],
+    props: ["keep", "vault", "vkeep"],
     data() {
       return {
         vaultKeep: {
           userId: "",
           vaultId: 0,
           keepId: 0,
-        },
-        keep: {
-          views: ''
         }
+      }
+    },
+    mounted() {
+      return this.$store.dispatch("getAllVaults")
+    },
+    watch: {
+      Keeps() {
+        debugger
+        this.$store.dispatch("EditKeep", this.keep)
       }
     },
     computed: {
@@ -72,7 +78,6 @@
     },
     methods: {
       Views() {
-        debugger
         this.keep.views += 1
         this.$store.dispatch("EditKeep", this.keep)
       },
@@ -80,10 +85,10 @@
         this.vaultKeep.keepId = this.keep.id
         this.vaultKeep.userId = this.user.id
         this.vaultKeep.vaultId = id
-        this.count++
-        this.keep.keeps = this.count
+        this.keep.keeps += 1
         this.$store.dispatch("AddKeepToVault", this.vaultKeep)
-        alert("Keep added to Stache")
+        alert('Keep added to Stache')
+        Swal.fire('Keep added to Stache')
       },
       Share() {
         this.$store.dispatch("makePublic")

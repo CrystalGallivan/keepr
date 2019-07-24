@@ -2,24 +2,31 @@
   <div id="app">
     <nav class="container-fluid navbar fixed-bottom navbar-light bg-light">
       <div class="row" id="navbar">
-        <router-link to="/">
-          <img src="../src/assets/icons8-english-mustache-100.png" alt="">
-        </router-link>
-        <a class="navbar-brand" style="font-family: 'Lobster', cursive; font-size: 55px" to="/">Stache</a>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        <button class="btn btn-light">
-          <router-link to="/vaults">My Staches</router-link>
-        </button>
-        <!-- TODO rename this to something to do with mustaches -->
-        <button class="btn btn-light" to="/keeps">
-          <router-link to="/keeps">My Keeps</router-link>
-        </button>
-        <button class="btn btn-light" to="/dashboards">
-          <router-link to="/dashboards">My Dashboard</router-link>
-        </button>
+        <div class="nav-item-1">
+          <router-link to="/">
+            <img src="../src/assets/mustache-final.jpg" alt="">
+          </router-link>
+          <a class="navbar-brand"
+            style="font-family: 'Lobster', cursive; font-size: 45px; padding: 0px; margin-top: -18px;" to="/">Stache</a>
+        </div>
+        <div class="nav-item-2">
+          <form class="form-inline">
+            <input class="form-control" style="min-width: 800px" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-dark" type="submit">Search</button>
+          </form>
+        </div>
+        <div class="nav-item-3">
+          <button class="btn btn-light btn-sm">
+            <router-link to="/vaults">My Staches</router-link>
+          </button>
+          <!-- TODO rename this to something to do with mustaches -->
+          <button class="btn btn-light btn-sm" to="/keeps">
+            <router-link to="/keeps">My Keeps</router-link>
+          </button>
+          <button class="btn btn-light btn-sm" to="/dashboards">
+            <router-link to="/dashboards">My Dashboard</router-link>
+          </button>
+        </div>
       </div>
     </nav>
     <router-view />
@@ -53,11 +60,32 @@
     color: whitesmoke;
   }
 
-  .navbar {
-    height: 100px;
+  .nav-item-1 {
     display: flex;
-    justify-content: center;
-    align-content: space-between;
-    flex-direction: row;
+    align-content: center;
+    padding: 10px;
+  }
+
+  .nav-item-3 {
+    padding: 10px;
+  }
+
+  button {
+    color: black;
+    font-family: 'Varela Round', sans-serif;
+  }
+
+  #navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .navbar {
+    height: 65px;
+    display: flex;
+    justify-content: space-around;
+    /* align-content: space-evenly; */
+    /* flex-direction: row; */
   }
 </style>

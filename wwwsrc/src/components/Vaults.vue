@@ -3,6 +3,7 @@
     <div class="card " id="vaults-card">
       <div class="card-body">
       </div>
+      <keeps-in-vault v-for="vkeep in vaultKeeps" :vkeep="vkeep" />
       <h4><b>
           <div class="vault-title">{{vault.name}}</div>
         </b></h4>
@@ -20,19 +21,25 @@
 </template>
 <!-- shadow p-3 mb-5 bg-white rounded -->
 <script>
+  import KeepsInVault from '@/components/KeepsInVault.vue'
   export default {
     name: "Vaults",
     props: ["vault"],
     data() {
       return {}
     },
-    mounted() {
-      this.$store.dispatch("getKeepsByVault")
+    computed: {
+      vaultKeeps() {
+        return this.$store.state.vaultKeeps;
+      }
     },
     methods: {
       Delete() {
         this.$store.dispatch("DeleteVault", this.vault.id)
       }
+    },
+    components: {
+      KeepsInVault
     }
   }
 </script>
