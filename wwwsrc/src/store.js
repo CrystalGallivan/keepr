@@ -22,7 +22,10 @@ export default new Vuex.Store({
     keep: {},
     vaults: [],
     vault: {},
-    vaultKeeps: []
+    vaultKeeps: [],
+    vault1: [],
+    vault2: [],
+    vault3: []
   },
   mutations: {
     setUser(state, user) {
@@ -50,8 +53,16 @@ export default new Vuex.Store({
     },
     setVaults(state, vaults) {
       state.vaults = vaults
+    },
+    setVault1(state, vault1) {
+      state.vault1 = vault1
+    },
+    setVault2(state, vault2) {
+      state.vault2 = vault2
+    },
+    setVault3(state, vault3) {
+      state.vault3 = vault3
     }
-
   },
   actions: {
     //#region Auth
@@ -160,24 +171,33 @@ export default new Vuex.Store({
         let res = await api.get("vaults")
         // console.log(res)
         commit("setVaults", res.data)
-        // res.data.forEach(v => {
-        //   v.id
-        //   dispatch("getVaultsById", v.id)
-        // });
+        let vaults = []
+        for (let i = 0; i < 3; i++) {
+          let vault = res.data[i]
+          vaults.push(vault)
+        }
+        commit("setVault1", vaults[0])
+        commit("setVault2", vaults[1])
+        commit("setVault3", vaults[2])
+        // dispatch("getKeepsByVault", vaults[0].id)
+        // dispatch("getKeepsByVault", vaults[1].id)
+        // dispatch("getKeepsByVault", vaults[2].id)
+
       } catch (e) {
         console.error(e)
       }
     },
-    async getVaultsById({ commit, dispatch }, id) {
-      try {
-        let res = await api.get("vaults/" + id)
-        // console.log(res)
-        commit("setVault", res.data)
-        // dispatch("getKeepsByVault", id)
-      } catch (e) {
-        console.error(e)
-      }
-    },
+    // async getVaultsById({ commit, dispatch }, id) {
+    //   try {
+    //     let res = await api.get("vaults/" + id)
+    //     // console.log(res)
+    //     commit("setVault", res.data)
+
+    //     // dispatch("getKeepsByVault", id)
+    //   } catch (e) {
+    //     console.error(e)
+    //   }
+    // },
     async CreateVault({ commit, dispatch }, payload) {
       try {
         let res = await api.post("vaults", payload)
@@ -218,6 +238,38 @@ export default new Vuex.Store({
         commit("setVault", id)
         router.push("/stache")
         // console.log(res)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async getKeepsByVault1({ commit, dispatch }, id) {
+      // debugger
+      try {
+        let res = await api.get("vaultkeeps/" + id)
+        // commit("setVaultKeeps", res.data)
+        console.log(res)
+        commit("setVault1", res.data)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async getKeepsByVault2({ commit, dispatch }, id) {
+      try {
+        let res = await api.get("vaultkeeps/" + id)
+        // commit("setVaultKeeps", res.data)
+        commit("setVault2", res.data)
+        console.log(res)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async getKeepsByVault3({ commit, dispatch }, id) {
+      try {
+
+        let res = await api.get("vaultkeeps/" + id)
+        // commit("setVaultKeeps", res.data)
+        commit("setVault3", res.data)
+        console.log(res)
       } catch (e) {
         console.log(e)
       }

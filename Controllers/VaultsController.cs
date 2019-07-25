@@ -24,7 +24,8 @@ namespace keepr.Controllers
     {
       try
       {
-        return Ok(_repo.GetAll());
+        string userId = HttpContext.User.FindFirstValue("Id");
+        return Ok(_repo.GetById(userId));
       }
       catch (Exception e)
       {
@@ -33,20 +34,20 @@ namespace keepr.Controllers
       }
     }
     //GET BY ID api/vaults/1
-    [Authorize]
-    [HttpGet("{id}")]
-    public ActionResult<Vault> Get(int id)
-    {
-      try
-      {
-        return Ok(_repo.GetById(id));
-      }
-      catch (Exception e)
-      {
+    // [Authorize]
+    // [HttpGet("{id}")]
+    // public ActionResult<Vault> Get(int id)
+    // {
+    //   try
+    //   {
+    //     return Ok(_repo.GetById(id));
+    //   }
+    //   catch (Exception e)
+    //   {
 
-        return BadRequest(e);
-      }
-    }
+    //     return BadRequest(e);
+    //   }
+    // }
     //GET BY OTHER MEANS api/vaults/something
     //TODO Id has been placed in the params temporarily so the server can spin up
     // [Authorize]

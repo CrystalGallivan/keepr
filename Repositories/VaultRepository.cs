@@ -10,24 +10,24 @@ namespace keepr.Repositories
   {
     private readonly IDbConnection _db;
     public VaultRepository(IDbConnection db) => _db = db;
-    public IEnumerable<Vault> GetAll()
-    {
-      try
-      {
-        return _db.Query<Vault>("SELECT * FROM vaults");
-      }
-      catch (Exception e)
-      {
-        throw e;
-      }
-    }
+    // public IEnumerable<Vault> GetAll()
+    // {
+    //   try
+    //   {
+    //     return _db.Query<Vault>("SELECT * FROM vaults");
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     throw e;
+    //   }
+    // }
 
-    public Vault GetById(int id)
+    public IEnumerable<Vault> GetById(string id)
     {
       try
       {
-        string query = "SELECT * FROM vaults WHERE id = @id";
-        Vault data = _db.QueryFirstOrDefault<Vault>(query, new { id });
+        string query = "SELECT * FROM vaults WHERE userId = @id";
+        IEnumerable<Vault> data = _db.Query<Vault>(query, new { id });
         if (data is null) throw new Exception("Invalid Id");
         return data;
       }

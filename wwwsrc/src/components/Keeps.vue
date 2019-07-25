@@ -4,7 +4,7 @@
       <div v-draggabilly v-packery-item class='packery-item'>
 
 
-        <div class="card " id="keeps-card" style="padding: 20px;" @click="Views">
+        <div class="card " id="keeps-card" style="padding: 20px; height: max-content;" @click="Views">
           <!-- @click="SelectKeep" -->
           <div class="card-body">
             <img :src="keep.img" width="300px" alt="I'm not here">
