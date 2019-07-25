@@ -1,5 +1,5 @@
 <template>
-  <div class="vault-keeps container-fluid">
+  <div class="vault-keeps container-fluid" id="vault-style">
     <div class="row">
       <vaults v-if="vault.userId == user.id" v-for="vault in vaults" :vault="vault" />
     </div>
@@ -31,4 +31,9 @@
   }
 </script>
 <style>
+  #vault-style {
+    display: flex;
+    justify-content: center;
+    padding: 75px;
+  }
 </style>

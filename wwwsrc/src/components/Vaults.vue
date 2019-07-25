@@ -4,11 +4,9 @@
       <div class="card-body">
       </div>
 
+      
       <h4><b>
-          <!-- <a style="color: black;"> -->
           <div @click="openVault" class="vault-title">{{vault.name}}</div>
-          <!-- </a> -->
-
         </b></h4>
       <div class="card-footer">{{vault.description}}
         <div id="actions">
