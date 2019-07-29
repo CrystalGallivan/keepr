@@ -8,10 +8,6 @@
         <img v-if="vkeep.isPrivate == true" src="../assets/icons8-secure-18.png" alt="">
         <img src="../assets/icons8-eye-18.png" alt="">{{vkeep.views}}
         <img src="../assets/icons8-english-mustache-18.png" alt="">{{vkeep.keeps}}</small>
-      <h4><b>
-          <div class="keep-title">{{vkeep.keeps}}</div>
-        </b>
-      </h4>
       <div class="card-footer">{{vkeep.description}}
         <div id="actions">
           <button class="btn rounded-circle btn-light" title="Share">
