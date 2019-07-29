@@ -1,6 +1,6 @@
 <template>
   <div class="my-dashboard contianer-fluid">
-    <div class="row" id="dashboard-header">
+    <div class="row" style="margin-top: 100px;" id="dashboard-header">
       <img src="../assets/icons8-english-mustache-50-w.png" alt="">
       <h1 style="padding-left: 10px; padding-right: 10px;">Stache</h1>
       <img src="../assets/icons8-english-mustache-50-w.png" alt="">

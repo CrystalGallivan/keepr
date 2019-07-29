@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view />
-    <nav class="container-fluid navbar fixed-bottom navbar-light bg-light">
+    <nav class="container-fluid navbar fixed-top navbar-light bg-light">
       <div class="row" id="navbar">
         <div class="nav-item-1">
           <router-link to="/">
@@ -12,7 +12,7 @@
         </div>
         <div class="nav-item-2">
           <form class="form-inline">
-            <input class="form-control" style="min-width: 400px" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control" style="max-width: 600px" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-dark" type="submit">Search</button>
           </form>
         </div>
@@ -79,6 +79,7 @@
 
   .nav-item-3 {
     padding: 10px;
+    margin-right: 40px;
   }
 
   button {
@@ -90,13 +91,14 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+
   }
 
   .navbar {
     height: 65px;
     display: flex;
     justify-content: space-around;
-    /* align-content: space-evenly; */
-    /* flex-direction: row; */
+    page-break-after: auto;
+
   }
 </style>

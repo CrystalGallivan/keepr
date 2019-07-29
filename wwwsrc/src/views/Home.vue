@@ -3,16 +3,16 @@
     <div class="container-fluid navbar navbar-light" id="top-navbar">
       <div class="row" id="nav-row-1">
 
-        <p>Welcome {{user.username}}</p>
-      </div>
-      <div class="row">
+        <!-- <p>Welcome {{user.username}}</p> -->
+        <!-- </div>
+      <div class="row"> -->
 
-        <button class="btn btn-light btn-sm" v-if="user.id" @click="logout">Logout</button>
+        <button class="btn btn-light btn-sm" id="logout-btn" v-if="user.id" @click="logout">Logout</button>
         <router-link v-else :to="{name: 'login'}">Login</router-link>
 
       </div>
     </div>
-    <div class="row" id="keep-cards">
+    <div class="row" style="margin-top: 100px;" id="keep-cards">
       <keeps v-if="keep.isPrivate == false" v-for="keep in keeps" :keep="keep" />
     </div>
   </div>
@@ -45,24 +45,29 @@
 </script>
 <style scoped>
   #top-navbar {
-    /* background-color: #fff; */
-    /* outline: 2px;
-    outline-color: white;
-    outline-width: 2rem; */
-    display: flex;
-    justify-content: space-evenly;
+    /* display: flex;
+    justify-content: space-evenly; */
     color: whitesmoke;
     font-family: 'Lobster', cursive;
     height: 40px;
-    font-size: 50px;
-    margin-top: -10px
+    font-size: 30px;
+    margin-top: -10px;
+    float: left;
   }
 
   .navbar {
     height: 20px;
     padding-bottom: 20px;
     margin: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-content: center;
+  }
 
+  #logout-btn {
+    top: 0;
+    margin-top: 57px;
+    z-index: 1032;
   }
 
   #keep-cards {

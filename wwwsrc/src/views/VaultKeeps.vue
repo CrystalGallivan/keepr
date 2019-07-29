@@ -1,6 +1,6 @@
 <template>
   <div class="vault-keeps container-fluid" id="vault-style">
-    <div class="row">
+    <div class="row" style="margin-top: 100px;">
       <vaults v-if="vault.userId == user.id" v-for="vault in vaults" :vault="vault" />
     </div>
   </div>

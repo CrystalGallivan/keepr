@@ -2,11 +2,9 @@
   <div class="vaults" id="cards">
     <div class="card " id="vaults-card">
       <div class="card-body">
+        <img src="http://www.pngall.com/wp-content/uploads/2016/04/Moustache-PNG-Clipart.png" width="300px"
+          height="200px" alt="">
       </div>
-      <keeps-in-vault v-for="v1 in vault1" />
-      <keeps-in-vault />
-      <keeps-in-vault />
-
       <h4><b>
           <div @click="openVault" class="vault-title">{{vault.name}}</div>
         </b></h4>
@@ -25,7 +23,6 @@
 <!-- shadow p-3 mb-5 bg-white rounded -->
 <script>
   import Stache from '@/views/Stache.vue'
-  import KeepsInVault from '@/components/KeepsInVault.vue'
   export default {
     name: "Vaults",
     props: ["vault"],
@@ -35,15 +32,6 @@
     computed: {
       vaultKeeps() {
         return this.$store.state.vaultKeeps;
-      },
-      vault1() {
-        return this.$store.state.vault1;
-      },
-      vault2() {
-        return this.$store.state.vault2;
-      },
-      vault3() {
-        return this.$store.state.vault3;
       }
     },
     methods: {
@@ -55,8 +43,7 @@
       }
     },
     components: {
-      Stache,
-      KeepsInVault
+      Stache
     }
   }
 </script>

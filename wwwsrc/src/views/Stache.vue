@@ -1,7 +1,7 @@
 <template>
   <div class="stache">
     <div>
-      <div>
+      <div style="margin-top: 100px">
         <p id="header"> Personal Stache</p>
         <p id="header-2">{{this.vault.name}}</p>
       </div>

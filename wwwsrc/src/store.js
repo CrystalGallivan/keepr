@@ -22,10 +22,7 @@ export default new Vuex.Store({
     keep: {},
     vaults: [],
     vault: {},
-    vaultKeeps: [],
-    vault1: [],
-    vault2: [],
-    vault3: []
+    vaultKeeps: []
   },
   mutations: {
     setUser(state, user) {
@@ -53,15 +50,6 @@ export default new Vuex.Store({
     },
     setVaults(state, vaults) {
       state.vaults = vaults
-    },
-    setVault1(state, vault1) {
-      state.vault1 = vault1
-    },
-    setVault2(state, vault2) {
-      state.vault2 = vault2
-    },
-    setVault3(state, vault3) {
-      state.vault3 = vault3
     }
   },
   actions: {
@@ -171,15 +159,6 @@ export default new Vuex.Store({
         let res = await api.get("vaults")
         // console.log(res)
         commit("setVaults", res.data)
-        let vaults = []
-        for (let i = 0; i < 3; i++) {
-          let vault = res.data[i]
-          vaults.push(vault)
-        }
-        commit("setVault1", vaults[0])
-        commit("setVault2", vaults[1])
-        commit("setVault3", vaults[2])
-
       } catch (e) {
         console.error(e)
       }

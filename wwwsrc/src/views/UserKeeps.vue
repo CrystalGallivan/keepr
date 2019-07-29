@@ -1,6 +1,6 @@
 <template>
   <div class="user-keeps container-fluid">
-    <div class="row">
+    <div class="row" id="user-keeps" style="margin-top: 100px">
       <keeps v-for="keep in keeps" :keep="keep" />
     </div>
   </div>
@@ -28,4 +28,9 @@
   }
 </script>
 <style>
+  #user-keeps {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
 </style>
