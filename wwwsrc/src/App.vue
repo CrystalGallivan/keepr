@@ -12,7 +12,7 @@
         </div>
         <div class="nav-item-2">
           <form class="form-inline">
-            <input class="form-control" style="min-width: 800px" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control" style="min-width: 400px" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-dark" type="submit">Search</button>
           </form>
         </div>

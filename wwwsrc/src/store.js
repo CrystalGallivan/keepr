@@ -179,25 +179,11 @@ export default new Vuex.Store({
         commit("setVault1", vaults[0])
         commit("setVault2", vaults[1])
         commit("setVault3", vaults[2])
-        // dispatch("getKeepsByVault", vaults[0].id)
-        // dispatch("getKeepsByVault", vaults[1].id)
-        // dispatch("getKeepsByVault", vaults[2].id)
 
       } catch (e) {
         console.error(e)
       }
     },
-    // async getVaultsById({ commit, dispatch }, id) {
-    //   try {
-    //     let res = await api.get("vaults/" + id)
-    //     // console.log(res)
-    //     commit("setVault", res.data)
-
-    //     // dispatch("getKeepsByVault", id)
-    //   } catch (e) {
-    //     console.error(e)
-    //   }
-    // },
     async CreateVault({ commit, dispatch }, payload) {
       try {
         let res = await api.post("vaults", payload)
